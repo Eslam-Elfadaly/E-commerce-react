@@ -69,7 +69,7 @@ const [email, setEmail] = useState('');
   };
 
   return (
-    <div className='lg:w-1/3 max-lg:w-[95%] py-7 px-2 mt-10  rounded-2xl m-auto bg-white'>
+    <div className='lg:w-1/3 text-black max-lg:w-[95%] py-7 px-2 mt-10  rounded-2xl m-auto bg-white'>
     <h1 className='font-bold text-2xl mb-5 text-center'>LogIn</h1>
     <form onSubmit={handleLogin} className='w-[90%] m-auto flex flex-col gap-5 *:rounded-2xl'>
       <input  type="email" value={email} className='border-black border-1 p-2 lg:p-3 focus:border-primary' onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
@@ -78,9 +78,9 @@ const [email, setEmail] = useState('');
       <div>{ password.length > 0 && ( password.length < 8? <span className='text-red-500 text-sm ml-2'>Password must be at least 8 characters</span>:<span className='text-green-600 text-sm ml-2'>Approved</span>)}</div>
       </div>
 
-      <Button type="submit" className={`p-5 text-lg cursor-pointer ${!email || !password || password.length < 8 ? 'bg-primary/40 pointer-events-none':'' }`}>Log In</Button>
+      <Button type="submit" className={`p-5 text-lg text-white cursor-pointer ${!email || !password || password.length < 8 ? 'bg-primary/40 pointer-events-none':'' }`}>Log In</Button>
 
-      <div>
+      {/* <div>
       {user ? (
         <div>
           <p>Signed in as {user.email}</p>
@@ -89,7 +89,7 @@ const [email, setEmail] = useState('');
       ) : (
         <button onClick={signInWithGoogle}>Sign In with Google</button>
       )}
-    </div>
+    </div> */}
 
       <div className='text-center'>You Don't Have An Account ? <NavLink to='/signUp' className='text-primary underline'>Sign Up</NavLink></div>
     </form>
