@@ -45,7 +45,7 @@ function Navbar() {
   const [openSearch, setOpenSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate();
-  
+
 const cart = useSelector((p)=> p.cartStore.cart);
 
 const favorite = useSelector((p)=> p.favoriteStore.favorite);
@@ -70,8 +70,9 @@ const logOut = async ()=>{
     <>
     <nav className=" sticky top-0 bg-background z-20 w-full shadow-xl">
     <div className="flex lg:max-w-10/12 m-auto items-center max-lg:px-3.5 justify-between lg:py-5 max-lg:py-5 sticky top-0 bg-background z-20">
-      <FiSidebar className="size-5 lg:hidden" onClick={()=> setOpenSidebar(true)}/>
 
+    <div className="flex items-center">
+      <FiSidebar className="size-5 lg:hidden" onClick={()=> setOpenSidebar(true)}/>
         <div className="flex items-center gap-5">
             <Link to='/' className="max-lg:flex-1 lg:text-start max-lg:ml-3">
             <h1 className="logo font-bold text-2xl text-start hover:text-primary hover:*:text-foreground transition-all duration-300 cursor-pointer">
@@ -79,8 +80,10 @@ const logOut = async ()=>{
                 <span className="text-primary transition-all duration-300">X</span>
             </h1>
             </Link>
-            {!isLoading && user && <span className="max-lg:hidden font-bold bg-primary p-2 rounded-2xl text-white">Hi, {(user?.displayName)?.split(' ')[0]?.toUpperCase()}👋</span>}
+            {!isLoading && user && <span className="max-lg:hidden font-bold bg-primary p-2 rounded-2xl text-white">Hello, {(user?.displayName)?.split(' ')[0]?.toUpperCase()}👋</span>}
         </div>
+    </ div>
+
 
                 <ul className="navs max-lg:hidden max-md:text-red-50 flex items-center gap-5 **:text-[15px] font-bold **:hover:border-primary **:hover:text-primary ">
                    <NavLink to="/" className={({isActive})=>isActive ? '*:border-primary text-primary' : ''}><Button variant="outline" className='cursor-pointer'>Home</Button></NavLink>

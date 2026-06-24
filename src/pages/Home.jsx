@@ -34,7 +34,8 @@ import ProductCard from '@/components/ProductCard';
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '@/firebase';
 
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -65,14 +66,21 @@ function Home() {
 },[categoryName])
 
 
-// scroll To Top
+const [user, setUser] = useState(null);
 
+useEffect(()=>{
+  const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
+    setUser(currentUser)
+  });
+
+  return ()=> unsubscribe();
+},[])
 
   return (
 <>
 {/* mainPhoto */}
 
-<div className='landPart relative overflow-hidden lg:flex max-lg:h-[230px] h-[500px] max-lg:relative mb-10 bg-black shadow-2xl'>  
+<div className='landPart relative overflow-hidden lg:flex max-lg:h-[230px] h-[500px] max-lg:relative lg:mb-10 mb-3 bg-black shadow-2xl'>  
       <StarsBackground />
     <img src={homeImage1} alt="" className=' max-lg:size-80 max-lg:scale-95 absolute lg:top-1/3 lg:right-20 max-lg:-right-20 max-lg:top-3/7 '/>
 
@@ -81,8 +89,13 @@ function Home() {
           <Link to='/shop'><button className='cursor-pointer flex items-center gap-4 bg-white w-fit text-black font-bold rounded-md lg:px-4 lg:py-2 px-3 py-1 hover:bg-black hover:text-white active:bg-black active:text-white transition-all duration-200'>Explore Shop  <FaArrowRight className='animate-pulse'/></button></Link>
           </div>
 </div>
+
+<div className='lg:hidden text-xl font-bold  flex justify-center  p-2 rounded-2xl mb-3'>
+  <h1><span className='text-primary'>Welcome back,</span> {user?.displayName.split(" ")[0].toUpperCase()} 👋</h1>
+</div>
+
 {/* ChooseCategory */}
-<ul className='ChooseCategory lg:flex max-lg:grid max-lg:grid-cols-2 justify-center lg:max-w-10/12 m-auto max-lg:px-3.5 flex-wrap items-center gap-4 max-lg:mb-5'>
+<ul className='ChooseCategory  lg:flex max-lg:grid max-lg:grid-cols-2 justify-center lg:max-w-10/12 m-auto max-lg:px-3.5 flex-wrap items-center lg:gap-4 gap-3  max-lg:mb-5'>
   {homeCategories.map((p, index)=>{
     return(
       <li key={index} onClick={()=>setCategoryName(p)}><Button variant='outline' className={`border-black max-lg:w-full hover:bg-foreground dark:hover:bg-foreground ${categoryName === p? 'bg-foreground dark:bg-foreground text-background':''} hover:text-background p-4 text-md cursor-pointer`}>{p}</Button></li>
