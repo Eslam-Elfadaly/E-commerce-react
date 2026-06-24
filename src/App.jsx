@@ -22,7 +22,7 @@ function App() {
 
 return (
 <>
-<Toaster position='top-center' duration={1700}/>
+<Toaster position='top-center' duration={2000}/>
 <ScrollToTop/>
 <Routes>
   <Route path='/' element={<MainLayout/>}>

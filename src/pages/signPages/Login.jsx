@@ -1,29 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { auth, googleProvider } from '@/firebase';
-import { signInWithEmailAndPassword , signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword , signInWithPopup } from 'firebase/auth';
 import { Button } from '@/components/ui/button';
 import { toast } from "sonner"
-import { NavLink } from 'react-router';
-// import { FcGoogle } from "react-icons/fc";
+import { NavLink, useNavigate } from 'react-router';
+import { FcGoogle } from "react-icons/fc";
 
 function Login() {
 
 const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  // login with userName and Password
   const handleLogin = async (e) => {
-
-
     e.preventDefault();
-
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
-      toast.success("LogIn Successful", {
+     
+      setTimeout(()=>{navigate('/')}, 1000)
+
+      setTimeout(()=>{toast.success(`Welcome, ${result.user?.displayName?.split(" ")[0]} 🥳`, {
         style: {
           background: "green",
           color: "white",
         },
-      });
+      });}, 1100)
 
       console.log(result.user)
     }
@@ -43,33 +44,31 @@ const [email, setEmail] = useState('');
     }
   };
 
-   const [user, setUser] = useState(null);
+  
 
-  useEffect(() => {
-    // Listen for auth state changes
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setTimeout(()=>{
-          console.log(user)
-      }, 1000)
-    });
-    return () => unsubscribe();
-  }, []);
-
+  // sign in With google
   const signInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+     const result =  await signInWithPopup(auth, googleProvider);
+     setTimeout(()=>{navigate('/')}, 1000)
+
+      setTimeout(()=>{toast.success(`Welcome, ${result.user?.displayName?.split(" ")[0]} 🥳`, {
+        style: {
+          background: "green",
+          color: "white",
+        },
+      });}, 1100)
+
     } catch (error) {
       console.error("Sign in error:", error);
     }
   };
 
-  const logOut = async () => {
-    await signOut(auth);
-  };
+  // logOut
+
 
   return (
-    <div className='lg:w-1/3 text-black max-lg:w-[95%] py-7 px-2 mt-10  rounded-2xl m-auto bg-white'>
+    <div className='lg:w-1/3 text-black max-lg:w-[95%] py-7 px-2 mt-10  rounded-2xl m-auto bg-white mb-15'>
     <h1 className='font-bold text-2xl mb-5 text-center'>LogIn</h1>
     <form onSubmit={handleLogin} className='w-[90%] m-auto flex flex-col gap-5 *:rounded-2xl'>
       <input  type="email" value={email} className='border-black border-1 p-2 lg:p-3 focus:border-primary' onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
@@ -80,15 +79,9 @@ const [email, setEmail] = useState('');
 
       <Button type="submit" className={`p-5 text-lg text-white cursor-pointer ${!email || !password || password.length < 8 ? 'bg-primary/40 pointer-events-none':'' }`}>Log In</Button>
 
-      <div>
-      {user ? (
-        <div>
-          <p>Signed in as {user.email}</p>
-          <button onClick={logOut}>Log Out</button>
-        </div>
-      ) : (
-        <button onClick={signInWithGoogle}>Sign In with Google</button>
-      )}
+      <div className='flex items-center justify-center gap-2 border p-1 cursor-pointer hover:bg-black/10 active:bg-black/10' onClick={signInWithGoogle}> 
+        Sign In With Google 
+        <FcGoogle  className='size-6'/>
     </div> 
 
       <div className='text-center'>You Don't Have An Account ? <NavLink to='/signUp' className='text-primary underline'>Sign Up</NavLink></div>

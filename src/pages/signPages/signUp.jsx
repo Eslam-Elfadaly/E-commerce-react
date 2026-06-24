@@ -5,20 +5,21 @@ import { toast } from "sonner"
 import { Button } from '@/components/ui/button';
 import { FaArrowLeft } from "react-icons/fa";
 import { NavLink } from 'react-router';
-
+import { useNavigate } from 'react-router';
 const SignUp = () => {
   const [userName, setUserName] = useState({firstName:'', lastName:''})
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
+  // signUp
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-
      const userInfo =  await createUserWithEmailAndPassword(auth, email, password);
-
-     await updateProfile (userInfo.user,{
-        displayName : `${userName.firstName} ${userName.lastName}`
+     await updateProfile (userInfo?.user,{
+        displayName : `${userName?.firstName} ${userName?.lastName}`
      });
 
      toast.success("SignUp Successful", {
@@ -27,7 +28,7 @@ const SignUp = () => {
           color: "white",
         },
       });
-
+      navigate('/')
     } catch (error) {
       if(error.code === 'auth/email-already-in-use'){
         toast.warning("Email is already exist", {

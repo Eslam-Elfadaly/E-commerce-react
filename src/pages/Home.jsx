@@ -35,8 +35,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/firebase";
 
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -48,7 +46,6 @@ function Home() {
     const homeCategories = ['SmartPhones', 'Tablets', 'Mobile-Accessories', 'Laptops'] 
     const [categoryName, setCategoryName] = useState('Mobile-Accessories');
 
-    // const [username, setuseName] = useState('');
 
     useEffect(()=>{
     const getDate = async ()=>{
@@ -70,13 +67,7 @@ function Home() {
 
 // scroll To Top
 
-  useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    console.log("USER:", user);
-  });
 
-  return unsubscribe;
-}, []);
   return (
 <>
 {/* mainPhoto */}
@@ -90,7 +81,6 @@ function Home() {
           <Link to='/shop'><button className='cursor-pointer flex items-center gap-4 bg-white w-fit text-black font-bold rounded-md lg:px-4 lg:py-2 px-3 py-1 hover:bg-black hover:text-white active:bg-black active:text-white transition-all duration-200'>Explore Shop  <FaArrowRight className='animate-pulse'/></button></Link>
           </div>
 </div>
-
 {/* ChooseCategory */}
 <ul className='ChooseCategory lg:flex max-lg:grid max-lg:grid-cols-2 justify-center lg:max-w-10/12 m-auto max-lg:px-3.5 flex-wrap items-center gap-4 max-lg:mb-5'>
   {homeCategories.map((p, index)=>{
