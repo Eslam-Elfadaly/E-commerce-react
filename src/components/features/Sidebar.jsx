@@ -52,11 +52,11 @@ function Sidebar({setOpenSidebar}) {
     {!isLoading &&  user?
     user.photoURL?
     <div className="flex items-center gap-5">
-      <img src={user?.photoURL} alt="" className="size-17 rounded-full"/>
-      <h1>Hi, {user.displayName?.split(' ')[0].toUpperCase()} 👋</h1>
+      <img src={user?.photoURL} alt="" className="size-19 rounded-full"/>
+      <h1 className="font-bold text-foreground text-lg w-fit p-2 rounded-2xl">Hi, {user.displayName?.split(' ')[0].toUpperCase()} 👋</h1>
     </div>
     :
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-5">
       <div className="bg-black text-white rounded-full size-15 text-xl font-bold cursor-poiter flex items-center justify-center">{user.displayName?.split('')[0].toUpperCase()}</div>
       <h1 className="font-bold text-foreground text-lg w-fit p-2 rounded-2xl">Hi, {user.displayName?.split(' ')[0].toUpperCase()} 👋</h1>
     </div>
