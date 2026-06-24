@@ -54,7 +54,7 @@ const favorite = useSelector((p)=> p.favoriteStore.favorite);
                     <NavLink to='/favorite' className={({isActive})=> isActive? 'text-primary':''} ><FaRegHeart className="size-6 max-md:size-5.5 hover:text-primary"/></NavLink>
                       <span className="absolute -top-2 -right-2 bg-primary font-normal text-white select-none max-lg:size-4 size-4.5 flex justify-center items-center rounded-full  text-sm">{favorite.length}</span>
                     </div>
-                    <NavLink to='/logIn'><Button variant="outline" className='max-md:hidden text-md hover:border-primary hover:text-primary'>Login</Button></NavLink>
+                    <NavLink to='/logIn'><Button variant="outline" className='max-lg:hidden text-md hover:border-primary hover:text-primary'>Login</Button></NavLink>
                     
                     <div className=' cursor-pointer border-1 rounded-full'>
                     <ModeToggle />
