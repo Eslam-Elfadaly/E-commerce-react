@@ -80,7 +80,7 @@ const [email, setEmail] = useState('');
 
       <Button type="submit" className={`p-5 text-lg text-white cursor-pointer ${!email || !password || password.length < 8 ? 'bg-primary/40 pointer-events-none':'' }`}>Log In</Button>
 
-      {/* <div>
+      <div>
       {user ? (
         <div>
           <p>Signed in as {user.email}</p>
@@ -89,7 +89,7 @@ const [email, setEmail] = useState('');
       ) : (
         <button onClick={signInWithGoogle}>Sign In with Google</button>
       )}
-    </div> */}
+    </div> 
 
       <div className='text-center'>You Don't Have An Account ? <NavLink to='/signUp' className='text-primary underline'>Sign Up</NavLink></div>
     </form>
