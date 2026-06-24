@@ -52,7 +52,7 @@ function Sidebar({setOpenSidebar}) {
     {!isLoading &&  user?
     user.photoURL?
     <div className="flex items-center gap-5">
-      <img src={user?.photoURL} alt="" className="size-13 rounded-full"/>
+      <img src={user?.photoURL} alt="" className="size-17 rounded-full"/>
       <h1>Hi, {user.displayName?.split(' ')[0].toUpperCase()} 👋</h1>
     </div>
     :
