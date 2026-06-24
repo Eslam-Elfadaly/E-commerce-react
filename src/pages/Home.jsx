@@ -90,9 +90,9 @@ useEffect(()=>{
           </div>
 </div>
 
-<div className='lg:hidden text-xl font-bold  flex justify-center  p-2 rounded-2xl mb-3'>
+{user && <div className='lg:hidden text-xl font-bold  flex justify-center  p-2 rounded-2xl mb-3'>
   <h1><span className='text-primary'>Welcome back,</span> {user?.displayName.split(" ")[0].toUpperCase()} 👋</h1>
-</div>
+</div>}
 
 {/* ChooseCategory */}
 <ul className='ChooseCategory  lg:flex max-lg:grid max-lg:grid-cols-2 justify-center lg:max-w-10/12 m-auto max-lg:px-3.5 flex-wrap items-center lg:gap-4 gap-3  max-lg:mb-5'>
