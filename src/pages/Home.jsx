@@ -48,7 +48,7 @@ function Home() {
     const homeCategories = ['SmartPhones', 'Tablets', 'Mobile-Accessories', 'Laptops'] 
     const [categoryName, setCategoryName] = useState('Mobile-Accessories');
 
-    const [username, setuseName] = useState('');
+    // const [username, setuseName] = useState('');
 
     useEffect(()=>{
     const getDate = async ()=>{

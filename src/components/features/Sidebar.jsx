@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 function Sidebar({setOpenSidebar}) {
 
   return (
-    <div className="fixed top-0 left-0 md:hidden w-screen bg-black/50 z-50 " onClick={()=> setOpenSidebar(false)}>
+    <div className="fixed top-0 left-0 lg:hidden w-screen bg-black/50 z-50 " onClick={()=> setOpenSidebar(false)}>
 
     <div className="min-h-screen  w-3/4 bg-sidebar text-sidebar-foreground p-5" onClick={(e)=> e.stopPropagation()}>
 

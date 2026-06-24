@@ -9,11 +9,11 @@ import { NavLink } from 'react-router';
 function Login() {
 
 const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('');
 
-
-// signIn With userName and Password
   const handleLogin = async (e) => {
+
+
     e.preventDefault();
 
     try {
@@ -43,8 +43,19 @@ const [password, setPassword] = useState('');
     }
   };
 
+   const [user, setUser] = useState(null);
 
-// signIn With Google
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setTimeout(()=>{
+          console.log(user)
+      }, 1000)
+    });
+    return () => unsubscribe();
+  }, []);
+
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
