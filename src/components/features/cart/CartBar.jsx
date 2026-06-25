@@ -75,9 +75,9 @@ useEffect(() => {
 
         <div className="total flex items-center justify-between p-3 pt-0 gap-3 text-xl font-bold">
             <h1>Total </h1>
-            <span>EG {totalPrice} </span>
+            <span>{totalPrice} $</span>
         </div>
-        <Button className='bg-white text-black text-xl font-bold rounded-md w-full p-6 hover:bg-background hover:text-foreground active:bg-background active:text-foreground cursor-pointer'>Checkout. EG {totalPrice}</Button>
+        <Button className='bg-white text-black text-xl font-bold rounded-md w-full p-6 hover:bg-background hover:text-foreground active:bg-background active:text-foreground cursor-pointer'>Checkout. {totalPrice} $</Button>
         </div>
 
         </div>

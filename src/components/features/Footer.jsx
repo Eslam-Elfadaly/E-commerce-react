@@ -72,11 +72,9 @@ const categories = ['Smartphones','Tablets','Mobile-Accessories','Laptops','Men\
                 <h1 className="text-[17px] font-bold mb-5">Quick Links</h1>
 
                 <ul className="flex flex-col gap-3 **:hover:text-primary">
-                    <Link><li>About us</li></Link>
-                    <Link><li>Contact us</li></Link>
-                    <Link><li>Terms & Conditions</li></Link>
-                    <Link><li>Privacy Policy</li></Link>
-                    <Link><li>FAQs</li></Link>
+                    <Link to='/about'><li>About us</li></Link>
+                    <Link to='/contactUs'><li>Contact us</li></Link>
+                    <Link to='/terms'><li>Terms & Conditions</li></Link>
                 </ul>
             </div>
 

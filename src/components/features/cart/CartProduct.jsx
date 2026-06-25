@@ -50,7 +50,7 @@ function CartProduct({product}) {
         </div>
 
         <div className="flex items-center justify-between">
-            <span className="text-foreground font-bold select-none text-lg">EG {((product?.price ?? 0) * product.amount).toFixed(1)}</span>
+            <span className="text-foreground font-bold select-none text-lg"> {((product?.price ?? 0) * product.amount).toFixed(1)} $</span>
 
             <ul className="flex items-center *:border-foreground *:select-none">
                 <li onClick={()=>handleMinus(product.id)} className="p-1 border-2 cursor-pointer active:-translate-y-1 lg:active:-translate-y-2 transition-all duration-300 ease-in-out"><FaMinus className="size-3"/></li>

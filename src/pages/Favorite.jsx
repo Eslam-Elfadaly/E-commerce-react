@@ -66,7 +66,7 @@ function handleRemoveAllFavorites(){
                         <td>{p.category}</td>
                         <td>{p.brand}</td>
                         <td className={`w-1/9 ${p.status === 'In Stock'? 'text-green-700': p.status === 'Low Stock'?'text-yellow-500':'text-red-500'}`}>{p.status}</td>
-                        <td className="font-bold">EG {p.price}</td>
+                        <td className="font-bold">{p.price} $</td>
                         <td>
                             <Button className={`text-white mb-1 ${p.status === 'Out of Stock'? 'cursor-not-allowed bg-primary/50':'cursor-pointer'} w-full`} onClick={(e)=> {
                             if(p.status === 'Out of Stock'){
@@ -112,7 +112,7 @@ function handleRemoveAllFavorites(){
 
             <div className="flex items-center justify-between">
 
-                <span className="text-foreground font-bold select-none text-lg">EG {p?.price.toFixed(1)}</span>
+                <span className="text-foreground font-bold select-none text-lg">$ {p?.price.toFixed(1)}</span>
 
                 <div className="butons flex gap-3 items-center mr-2">
                   <FaShoppingCart className={`text-primary size-5.5 active:-translate-y-1 transition-all duration-300 ${p.status === 'Out of Stock'? 'cursor-not-allowed bg-primary/50':'cursor-pointer'}`} onClick={(e)=> {

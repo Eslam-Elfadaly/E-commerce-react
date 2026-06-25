@@ -17,6 +17,9 @@ import ScrollToTop from './components/ScrollToTop'
 import SignUp from './pages/signPages/signUp'
 import { Toaster } from 'sonner'
 import Login from './pages/signPages/Login'
+import About from './pages/About'
+import ContactUs from './pages/ContactUs'
+import Terms from './pages/Terms'
 
 function App() {
 
@@ -29,6 +32,11 @@ return (
 
   <Route path='signUp' element={<SignUp/>}/>
   <Route path='logIn' element={<Login/>}/>
+
+
+  <Route path='about' element={<About/>}/>
+  <Route path='contactUs' element={<ContactUs/>}/>
+  <Route path='terms' element={<Terms/>}/>
 
 
   <Route index element={<Home/>}/>
