@@ -7,39 +7,46 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useEffect, useState } from "react";
 import { toast } from "sonner"
+import { Spinner } from "../ui/spinner";
+import { useNavigate } from "react-router";
 
 function Sidebar({setOpenSidebar}) {
 
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(()=>{
+
     const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
       setUser(currentUser)
-      setIsLoading(false)
-      console.log(currentUser)
     });
+    
     return () => unsubscribe();
   }, [])
+
 
   // logOut
 
   const logOut = async ()=>{
-    setTimeout(async ()=>{
-      await signOut(auth);
-      await setOpenSidebar(false);
-    }, 1500)
 
-    setTimeout(async ()=>{
-      await toast.success(`Log Out !`, {
-        style: {
-          background: "red",
-          color: "white",
-        },
-      })
-    }, 1500)
+  setLoading(true);
 
+  setTimeout(async ()=>{
 
+    setLoading(false);
+    await signOut(auth);
+    setOpenSidebar(false);
+    
+    toast.success(`Logged Out !`, {
+      style: {
+        background: "red",
+        color: "white",
+      },
+    })
+    navigate('/');
+    
+  },2000)
   }
   return (
     <div className="fixed top-0 left-0 lg:hidden w-screen bg-black/50 z-50 " onClick={()=> setOpenSidebar(false)}>
@@ -51,7 +58,7 @@ function Sidebar({setOpenSidebar}) {
         <IoClose className="size-7" onClick={()=>setOpenSidebar(false)}/>
     </div>
 
-    {!isLoading &&  user?
+    { user?
     user.photoURL?
     <div className="flex items-center gap-4">
       <img src={user?.photoURL} alt="" className="size-19 rounded-full"/>
@@ -70,11 +77,9 @@ function Sidebar({setOpenSidebar}) {
     </ul>
 
     { user ? 
-    <NavLink to='/' onClick={()=>{logOut()}}><Button className={`flex items-center gap-2 w-full p-5 text-lg font-bold `}>
-    LogOut
-    <MdLogin className=" size-5"/>
+    <Button disabled={loading} onClick={logOut} className={`flex items-center gap-2 w-full p-5 text-lg font-bold `}>
+     {loading? (<>Logging Out <Spinner/></>):(<>LogOut <MdLogin className=" size-5"/></>)}
     </Button>
-    </NavLink>
     : 
     <NavLink to='/logIn' onClick={()=>setOpenSidebar(false)}><Button className="flex items-center gap-2 w-full p-5 text-lg font-bold">
       Login

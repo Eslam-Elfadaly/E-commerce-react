@@ -2,6 +2,7 @@ import { IoSearch } from "react-icons/io5";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { FaRegHeart } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { Spinner } from "../ui/spinner";
 import { NavLink } from "react-router";
 import { Link } from "react-router";
 import {ModeToggle} from '@/components/theme-toggle'
@@ -33,7 +34,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
@@ -43,7 +43,7 @@ function Navbar() {
   const [OpenSideBar, setOpenSidebar] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [openSearch, setOpenSearch] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
 const cart = useSelector((p)=> p.cartStore.cart);
@@ -54,18 +54,24 @@ const favorite = useSelector((p)=> p.favoriteStore.favorite);
   const [user, setUser] = useState(null);
   useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-    setIsLoading(false)
       setUser(currentUser)
-    // console.log("USER:", user);
   });
 
-  return unsubscribe;
+  return ()=>  unsubscribe();
 }, []);
 
 
-const logOut = async ()=>{
-  await signOut(auth)
+const logOut = ()=>{
+  setLoading(true);
+
+  setTimeout(async()=>{
+
+    setLoading(false);
+    await signOut(auth);
+
+  },2000)
 }
+
   return (
     <>
     <nav className=" sticky top-0 bg-background z-20 w-full shadow-xl">
@@ -80,7 +86,7 @@ const logOut = async ()=>{
                 <span className="text-primary transition-all duration-300">X</span>
             </h1>
             </Link>
-            {!isLoading && user && <span className="max-lg:hidden font-bold bg-primary p-2 rounded-2xl text-white">Hello, {(user?.displayName)?.split(' ')[0]?.toUpperCase()}👋</span>}
+            {user && <span className="max-lg:hidden font-bold bg-primary p-2 rounded-2xl text-white">Hello, {(user?.displayName)?.split(' ')[0]?.toUpperCase()}👋</span>}
         </div>
     </ div>
 
@@ -106,7 +112,7 @@ const logOut = async ()=>{
 
 
 {/* user exist or no ??  */}
-                    {!isLoading &&  user ?  
+                    {user ? 
 
                     // use has photo ??
                     user?.photoURL?
@@ -126,10 +132,9 @@ const logOut = async ()=>{
                           <div><span className="font-bold">Email : </span> <span className="text-sm">{user.email}</span></div>
                         </div>
                          <DropdownMenuSeparator className='mb-2'/>
-                         <DropdownMenuItem className='bg-primary text-white flex justify-center p-2 hover:bg-primary/80 cursor-pointer' onClick={logOut}>
-                           <LogOutIcon/>
-                           Sign Out
-                         </DropdownMenuItem>
+                         <Button disabled={loading} className='bg-primary text-white w-full flex justify-center p-5 text-md  cursor-pointer' onClick={logOut}>
+                           {loading? (<>Logging Out <Spinner/></>):(<><LogOutIcon/> Log Out</>)}
+                         </Button>
                        </DropdownMenuContent>
                       </DropdownMenu>
 
@@ -149,10 +154,10 @@ const logOut = async ()=>{
                           <div><span className="font-bold">Email : </span> <span className="text-sm">{user?.email}</span></div>
                         </div>
                          <DropdownMenuSeparator className='mb-2'/>
-                         <DropdownMenuItem className='bg-primary text-white flex justify-center p-2 hover:bg-primary/80 cursor-pointer' onClick={logOut}>
-                           <LogOutIcon/>
-                           Sign Out
-                         </DropdownMenuItem>
+                         <Button disabled={loading} className='bg-primary text-white w-full flex justify-center p-5 text-md  cursor-pointer' onClick={logOut}>
+                           
+                           {loading? (<>Logging Out <Spinner/></>):(<><LogOutIcon/> Log Out</>)}
+                         </Button>
                        </DropdownMenuContent>
                       </DropdownMenu>
 

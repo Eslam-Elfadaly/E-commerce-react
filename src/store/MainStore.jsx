@@ -12,8 +12,7 @@ const MainStore = configureStore({
 
 MainStore.subscribe(() => {
   localStorage.setItem(
-    "cart",
-    JSON.stringify(MainStore.getState().cartStore.cart)
+    'cart',JSON.stringify(MainStore.getState().cartStore.cart)
   );
   localStorage.setItem(
     'favorite', JSON.stringify(MainStore.getState().favoriteStore.favorite) 

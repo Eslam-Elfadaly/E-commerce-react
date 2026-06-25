@@ -67,20 +67,20 @@ function Home() {
 
 
 const [user, setUser] = useState(null);
-
 useEffect(()=>{
-  const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
-    setUser(currentUser)
-  });
 
-  return ()=> unsubscribe();
+const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
+  setUser(currentUser);
+  });
+  return ()=> unsubscribe()
 },[])
 
   return (
 <>
+
 {/* mainPhoto */}
 
-<div className='landPart relative overflow-hidden lg:flex max-lg:h-[230px] h-[500px] max-lg:relative lg:mb-10 mb-6 bg-black shadow-2xl'>  
+<div className={`landPart relative overflow-hidden lg:flex max-lg:h-[230px] h-[500px] max-lg:relative lg:mb-10 ${user? 'mb-3': 'mb-10'} bg-black shadow-2xl`}>  
       <StarsBackground />
     <img src={homeImage1} alt="" className=' max-lg:size-80 max-lg:scale-95 absolute lg:top-1/3 lg:right-20 max-lg:-right-20 max-lg:top-3/7 '/>
 
