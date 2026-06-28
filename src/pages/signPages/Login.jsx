@@ -6,7 +6,6 @@ import { Spinner } from '@/components/ui/spinner';
 import { toast } from "sonner"
 import { NavLink, useNavigate } from 'react-router';
 import { FcGoogle } from "react-icons/fc";
-
 function Login() {
 
 const [email, setEmail] = useState('');
@@ -107,8 +106,6 @@ const [loading, setLoading] = useState(false);
 
 
   };
-
-  // logOut
 
 
   return (

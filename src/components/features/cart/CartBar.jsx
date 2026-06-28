@@ -1,13 +1,20 @@
 import { IoClose } from "react-icons/io5";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import CartProduct from "./CartProduct";
 import { useSelector } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router";
 import { FaArrowRight } from "react-icons/fa";
+import { auth } from "@/firebase";
+import { toast } from "sonner";
+import { Spinner } from "@/components/ui/spinner";
+import { setCart } from "@/store/CartSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 function CartBar({openCart,setOpenCart}) {
 
+const [loading, setLoading] = useState(false);
 
 const cart = useSelector((p)=> p.cartStore.cart)
 
@@ -28,7 +35,33 @@ useEffect(() => {
     }, [openCart]);
 
 
-
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
+    function handleCheckout(){
+        
+    const user = auth?.currentUser;
+     setLoading(true);
+    setTimeout(()=>{
+        if(user){
+            toast.success(('Payment Successful ✅'), {style:{
+                backgroundColor:'green',
+                color:'white'
+            }})
+            setLoading(false);
+            dispatch(setCart([]));
+            navigate('/');
+            setOpenCart(false);
+            
+        }else{
+            setLoading(false);
+            toast.error(('Please login first'), {style:{
+                backgroundColor:'red',
+                color:'white'
+            }})
+        }
+    },2000)
+}
 
     // if Cart Empty
     if(cart.length === 0){
@@ -77,7 +110,7 @@ useEffect(() => {
             <h1>Total </h1>
             <span>{totalPrice} $</span>
         </div>
-        <Button className='bg-white text-black text-xl font-bold rounded-md w-full p-6 hover:bg-background hover:text-foreground active:bg-background active:text-foreground cursor-pointer'>Checkout. {totalPrice} $</Button>
+        <Button disabled={loading} onClick={handleCheckout} className='bg-white text-black text-xl font-bold rounded-md w-full p-6 hover:bg-background hover:text-foreground active:bg-background active:text-foreground cursor-pointer'>{loading? <>Checking Out <Spinner/></>: <>Checkout. {totalPrice} $</>}</Button>
         </div>
 
         </div>

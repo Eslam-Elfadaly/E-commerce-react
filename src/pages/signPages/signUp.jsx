@@ -8,13 +8,11 @@ import { FaArrowLeft } from "react-icons/fa";
 import { NavLink } from 'react-router';
 import { useNavigate } from 'react-router';
 
-
 const SignUp = () => {
   const [userName, setUserName] = useState({firstName:'', lastName:''})
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
 
   // signUp
@@ -75,6 +73,8 @@ const SignUp = () => {
     } 
      }, 2000)
   };
+
+
 
   return (
     <div className='lg:w-1/3 max-lg:w-[95%] py-7 px-2 mt-10 text-black  rounded-2xl m-auto bg-white'>
