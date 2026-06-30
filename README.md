@@ -1,16 +1,75 @@
-# React + Vite
+# 🛒 React E-Commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive E-Commerce web application built with React, featuring authentication, shopping cart, favorites, Stripe test payments, and a clean user experience.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🔗 https://e-commerce-react-zeta-lac.vercel.app/
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+##  Features
 
-## Expanding the ESLint configuration
+- Authentication with Email & Password
+-  Google Sign In
+-  Browse Products
+-  Product Search
+-  Favorites
+-  Shopping Cart
+-  Dark / Light Mode
+-  Fully Responsive Design
+-  Contact Form
+-  Fast and Smooth UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+##  Built With
+
+### Frontend
+
+- React
+- React Router
+- Redux Toolkit
+- Tailwind CSS
+- Shadcn UI
+- React Icons
+
+### Backend & Services
+
+- Firebase Authentication
+- Fake Store API
+
+##  Responsive
+
+The application is optimized for:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+
+## 📈 Future Improvements
+
+- Admin Dashboard
+- Product Reviews
+- Order History
+- Wishlist Sync with Database
+- User Profile
+- Coupons & Discounts
+- Product Filtering
+- Categories
+- Real Backend
+
+---
+
+## 👨‍💻 Author
+
+**Eslam Elfadaly**
+
+- LinkedIn: https://www.linkedin.com/in/eslam-elfadaly-b40a02286
+---
+
+## ⭐ Support
+
+If you like this project, don't forget to give it a ⭐ on GitHub.
